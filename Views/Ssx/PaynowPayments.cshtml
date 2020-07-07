@@ -1,0 +1,55 @@
+﻿@*@{*@
+@*    ViewBag.Title = "PaynowPayments";*@
+@*}*@
+@*<h2>Paynow Payments</h2>*@
+@using (Html.BeginForm("PaynowPayments", "Ssx", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset style="margin-top: 3em">
+        @*    <legend>Payment Confirmation</legend>*@
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Payment Confirmation</div>
+            <div class="panel-body">
+
+                @if (@ViewData["error"] == null)
+                {
+
+                    <div class="caption">
+                        <input type="hidden" value="@ViewData["quantity"]" name="quantity"/>
+                        <input type="hidden" value="@ViewData["security"]" name="security"/>
+                        <input type="hidden" value="@ViewData["company"]" name="company"/>
+                        <input type="hidden" value="@ViewData["price"]" name="price"/>
+                        <input type="hidden" value="@ViewData["total"]" name="total"/>
+                        <input type="hidden" value="@ViewData["cdsNumber"]" name="cdsNumber"/>
+
+                        <p> <b>ATP Number</b> : @ViewData["cdsNumber"]</p>
+                        <p> You are about to make a payment of @ViewData["quantity"] units of @ViewData["security"] of @ViewData["company"] at a price of $@ViewData["price"] </p>
+                        <p>
+                            <b>Total Amount</b> : $@ViewData["total"]
+                        </p>
+                        @*                    <p><a href="#" class="btn btn-primary" role="button">Proceed to Payment</a>*@
+                        @*                        $1$                <a href="#" class="btn btn-default" role="button">Button</a>#1#*@
+                        @*                    </p>*@
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-8">
+                            <input type="submit" value="Proceed to Payment" class="btn btn-primary"/>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="caption">
+                        <p> <b>Kindly post your order again</b> </p>
+                    </div>
+                }
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
